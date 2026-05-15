@@ -1,0 +1,1698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FSUK 2026 — Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #e8002d;
+    --yellow: #f5c400;
+    --dark: #0a0a0f;
+    --panel: #12121a;
+    --card: #1a1a26;
+    --border: #2a2a3f;
+    --text: #e8e8f0;
+    --muted: #8888aa;
+    --green: #00c47a;
+    --blue: #3399ff;
+    --orange: #ff6b2b;
+    --purple: #9966ff;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a0010 50%, #0a0a0f 100%);
+    border-bottom: 3px solid var(--red);
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(232,0,45,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  header::after {
+    content: 'FS';
+    position: absolute;
+    right: 2rem; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 9rem;
+    color: rgba(232,0,45,0.06);
+    pointer-events: none;
+    line-height: 1;
+  }
+  .header-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 0.5rem;
+  }
+  header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.75rem;
+  }
+  header h1 span { color: var(--red); }
+  header p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    max-width: 500px;
+  }
+
+  /* ===== NAV TABS ===== */
+  .nav-wrap {
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 100;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-wrap::-webkit-scrollbar { display: none; }
+  nav {
+    display: flex;
+    min-width: max-content;
+    padding: 0 1rem;
+  }
+  nav button {
+    background: none;
+    border: none;
+    padding: 1rem 1.2rem;
+    cursor: pointer;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+    position: relative;
+  }
+  nav button:hover { color: var(--text); }
+  nav button.active {
+    color: var(--yellow);
+    border-bottom-color: var(--yellow);
+  }
+  nav button .dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    margin-right: 6px;
+    background: var(--muted);
+    vertical-align: middle;
+    position: relative; top: -1px;
+  }
+  nav button.active .dot { background: var(--yellow); }
+
+  /* ===== MAIN ===== */
+  main { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ===== SECTION HEADERS ===== */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-icon {
+    width: 48px; height: 48px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+  .section-header h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.03em;
+    line-height: 1;
+  }
+  .section-header p {
+    color: var(--muted);
+    font-size: 0.88rem;
+    margin-top: 0.2rem;
+  }
+
+  /* ===== CARDS ===== */
+  .grid { display: grid; gap: 1.25rem; }
+  .grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .grid-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .grid-4 { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .card.red::before { background: var(--red); }
+  .card.yellow::before { background: var(--yellow); }
+  .card.green::before { background: var(--green); }
+  .card.blue::before { background: var(--blue); }
+  .card.orange::before { background: var(--orange); }
+  .card.purple::before { background: var(--purple); }
+
+  .card h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.6rem;
+  }
+  .card .card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.03em;
+    margin-bottom: 0.6rem;
+  }
+  .card p { font-size: 0.9rem; color: var(--muted); line-height: 1.5; }
+
+  /* ===== MEMORY AIDS ===== */
+  .memory-box {
+    background: linear-gradient(135deg, rgba(245,196,0,0.08), rgba(245,196,0,0.03));
+    border: 1px solid rgba(245,196,0,0.25);
+    border-left: 4px solid var(--yellow);
+    border-radius: 0 10px 10px 0;
+    padding: 1.2rem 1.4rem;
+    margin: 1.25rem 0;
+  }
+  .memory-box .memory-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 0.5rem;
+  }
+  .memory-box .mnemonic {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 0.05em;
+    color: var(--yellow);
+    margin-bottom: 0.3rem;
+  }
+  .memory-box p { font-size: 0.88rem; color: var(--text); }
+  .memory-box strong { color: var(--yellow); }
+
+  .tip-box {
+    background: rgba(0,196,122,0.06);
+    border: 1px solid rgba(0,196,122,0.2);
+    border-left: 4px solid var(--green);
+    border-radius: 0 10px 10px 0;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    font-size: 0.88rem;
+  }
+  .tip-box .tip-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 0.3rem;
+  }
+
+  .warn-box {
+    background: rgba(232,0,45,0.06);
+    border: 1px solid rgba(232,0,45,0.2);
+    border-left: 4px solid var(--red);
+    border-radius: 0 10px 10px 0;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    font-size: 0.88rem;
+  }
+  .warn-box .warn-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 0.3rem;
+  }
+
+  /* ===== RULES LIST ===== */
+  .rules-list { list-style: none; }
+  .rules-list li {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 0.9rem;
+  }
+  .rules-list li:last-child { border-bottom: none; }
+  .rules-list .rule-id {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    white-space: nowrap;
+    margin-top: 2px;
+    min-width: 50px;
+  }
+
+  /* ===== POINTS TABLE ===== */
+  .points-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.65rem 0.9rem;
+    border-radius: 8px;
+    margin-bottom: 0.4rem;
+  }
+  .points-row:nth-child(even) { background: rgba(255,255,255,0.02); }
+  .points-row .event-name {
+    flex: 1;
+    font-size: 0.9rem;
+  }
+  .points-badge {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.05em;
+    min-width: 55px;
+    text-align: right;
+  }
+  .bar {
+    height: 4px;
+    border-radius: 2px;
+    background: var(--red);
+    flex-shrink: 0;
+  }
+
+  /* ===== NUMBERS SHOWCASE ===== */
+  .num-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.2rem;
+    text-align: center;
+  }
+  .num-card .big-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.8rem;
+    line-height: 1;
+    margin-bottom: 0.2rem;
+  }
+  .num-card .num-label {
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+  }
+
+  /* ===== FLAG GUIDE ===== */
+  .flag-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.9rem;
+  }
+  .flag-block {
+    width: 44px; height: 28px;
+    border-radius: 5px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  /* ===== PENALTY TABLE ===== */
+  .penalty-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  .penalty-table th {
+    background: rgba(255,255,255,0.04);
+    padding: 0.6rem 0.9rem;
+    text-align: left;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .penalty-table td {
+    padding: 0.6rem 0.9rem;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    vertical-align: top;
+  }
+  .penalty-table tr:last-child td { border-bottom: none; }
+  .pen-val { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.05em; }
+  .pen-dnf { color: var(--red); }
+  .pen-time { color: var(--yellow); }
+  .pen-pts { color: var(--orange); }
+
+  /* ===== INSPECTION STEPPER ===== */
+  .stepper { position: relative; padding-left: 2.5rem; }
+  .stepper::before {
+    content: '';
+    position: absolute;
+    left: 11px; top: 24px; bottom: 24px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--red), var(--yellow));
+  }
+  .step {
+    position: relative;
+    padding: 0.9rem 0 0.9rem 0.5rem;
+  }
+  .step::before {
+    content: attr(data-n);
+    position: absolute;
+    left: -2.5rem;
+    width: 24px; height: 24px;
+    background: var(--red);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.85rem;
+    color: white;
+    top: 0.9rem;
+  }
+  .step h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+  }
+  .step p { font-size: 0.84rem; color: var(--muted); }
+  .step .tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-left: 6px;
+    vertical-align: middle;
+    position: relative; top: -1px;
+  }
+  .tag-ev { background: rgba(51,153,255,0.15); color: var(--blue); }
+  .tag-cv { background: rgba(255,107,43,0.15); color: var(--orange); }
+  .tag-dv { background: rgba(153,102,255,0.15); color: var(--purple); }
+
+  /* ===== ACRONYM CARD ===== */
+  .acronym-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.6rem;
+    margin-top: 0.75rem;
+  }
+  .acro-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.6rem 0.75rem;
+  }
+  .acro-item .acro-short {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    color: var(--yellow);
+  }
+  .acro-item .acro-long {
+    font-size: 0.72rem;
+    color: var(--muted);
+    line-height: 1.3;
+  }
+
+  /* ===== SUBHEADINGS ===== */
+  .subhead {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 2rem 0 1rem;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .subhead::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ===== QUIZ CARD ===== */
+  .quiz-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.4rem;
+    margin-bottom: 1rem;
+  }
+  .quiz-q {
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+  }
+  .quiz-reveal-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+  .quiz-reveal-btn:hover { border-color: var(--yellow); color: var(--yellow); }
+  .quiz-answer {
+    display: none;
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    background: rgba(0,196,122,0.07);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    border: 1px solid rgba(0,196,122,0.15);
+  }
+  .quiz-answer.visible { display: block; animation: fadeIn 0.2s ease; }
+  .quiz-answer strong { color: var(--green); }
+
+  /* ===== PROGRESS BAR ===== */
+  .prog-wrap { background: rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden; height: 6px; }
+  .prog-fill { height: 100%; border-radius: 4px; background: var(--red); transition: width 0.3s; }
+
+  /* ===== DIVIDER ===== */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2rem 0;
+  }
+
+  /* ===== CHECKLIST ===== */
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.55rem 0;
+    font-size: 0.9rem;
+  }
+  .check-item input[type=checkbox] {
+    width: 16px; height: 16px;
+    margin-top: 2px;
+    accent-color: var(--red);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .check-item label { cursor: pointer; }
+
+  /* ===== HIGHLIGHT ===== */
+  .hl-red { color: var(--red); font-weight: 600; }
+  .hl-yellow { color: var(--yellow); font-weight: 600; }
+  .hl-green { color: var(--green); font-weight: 600; }
+  .hl-blue { color: var(--blue); font-weight: 600; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 640px) {
+    header { padding: 1.5rem; }
+    main { padding: 1.25rem 1rem 3rem; }
+    .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-tag">Formula Student UK · 2026 Rules</div>
+  <h1>THE <span>COMPLETE</span><br>STUDY GUIDE</h1>
+  <p>Every rule, key number, and penalty — organised, colour-coded and built for fast memorisation.</p>
+</header>
+
+<div class="nav-wrap">
+  <nav id="mainNav">
+    <button class="active" onclick="switchTab('overview')"><span class="dot"></span>Overview</button>
+    <button onclick="switchTab('admin')"><span class="dot"></span>Admin Rules</button>
+    <button onclick="switchTab('technical')"><span class="dot"></span>Technical</button>
+    <button onclick="switchTab('inspections')"><span class="dot"></span>Inspections</button>
+    <button onclick="switchTab('static')"><span class="dot"></span>Static Events</button>
+    <button onclick="switchTab('dynamic')"><span class="dot"></span>Dynamic Events</button>
+    <button onclick="switchTab('penalties')"><span class="dot"></span>Penalties</button>
+    <button onclick="switchTab('acronyms')"><span class="dot"></span>Acronyms</button>
+    <button onclick="switchTab('quiz')"><span class="dot"></span>Quick Quiz</button>
+  </nav>
+</div>
+
+<main>
+
+<!-- ===== OVERVIEW ===== -->
+<div class="tab-panel active" id="tab-overview">
+
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(232,0,45,0.12);">🏎️</div>
+    <div>
+      <h2>Competition Overview</h2>
+      <p>What is FSUK, who organises it, and how the points work</p>
+    </div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-label">🧠 Core Values Mnemonic</div>
+    <div class="mnemonic">S · E · O · I</div>
+    <p><strong>S</strong>afety · <strong>E</strong>ducation · <strong>O</strong>penness · <strong>I</strong>nclusive<br>
+    Think: "<strong>Students Excel On Ingenuity</strong>"</p>
+  </div>
+
+  <div class="subhead">Competition Structure</div>
+  <div class="grid grid-3">
+    <div class="card red">
+      <h3>Class 1</h3>
+      <div class="card-title">FS Class</div>
+      <p>Running vehicles — static + dynamic events. Max <strong>1000 pts</strong>. CV, EV, or AFV powertrain.</p>
+    </div>
+    <div class="card blue">
+      <h3>Class 2</h3>
+      <div class="card-title">FS-AI Class</div>
+      <p>Driverless vehicles. ADS (own car) or DDT (IMechE car). Combined rules from two documents.</p>
+    </div>
+    <div class="card orange">
+      <h3>Class 3</h3>
+      <div class="card-title">Concept Class</div>
+      <p>Non-running design entries. Static events only. Max <strong>460 pts</strong>. Designed for FS the next year.</p>
+    </div>
+  </div>
+
+  <div class="subhead">FS Class Points Breakdown — Total: 1000</div>
+  <div class="grid grid-2">
+    <div class="card" style="border-color:rgba(245,196,0,0.2)">
+      <h3>Static Events</h3>
+      <div style="margin-top:0.5rem">
+        <div class="points-row">
+          <span class="event-name">📊 Engineering Design</span>
+          <div class="bar" style="width:60px"></div>
+          <span class="points-badge" style="color:var(--yellow)">150</span>
+        </div>
+        <div class="points-row">
+          <span class="event-name">💼 Business Plan Presentation</span>
+          <div class="bar" style="width:46px"></div>
+          <span class="points-badge" style="color:var(--yellow)">115</span>
+        </div>
+        <div class="points-row">
+          <span class="event-name">💰 Cost & Manufacturing</span>
+          <div class="bar" style="width:46px"></div>
+          <span class="points-badge" style="color:var(--yellow)">115</span>
+        </div>
+        <div class="points-row">
+          <span class="event-name">🖥️ Lap Time Simulation</span>
+          <div class="bar" style="width:8px"></div>
+          <span class="points-badge" style="color:var(--yellow)">20</span>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="border-color:rgba(232,0,45,0.2)">
+      <h3>Dynamic Events</h3>
+      <div style="margin-top:0.5rem">
+        <div class="points-row">
+          <span class="event-name">🏁 Endurance</span>
+          <div class="bar" style="width:100px"></div>
+          <span class="points-badge" style="color:var(--red)">250</span>
+        </div>
+        <div class="points-row">
+          <span class="event-name">⚡ Efficiency</span>
+          <div class="bar" style="width:40px"></div>
+          <span class="points-badge" style="color:var(--red)">100</span>
+        </div>
+        <div class="points-row">
+          <span class="event-name">🔄 Autocross</span>
+          <div class="bar" style="width:40px"></div>
+          <span class="points-badge" style="color:var(--red)">100</span>
+        </div>
+        <div class="points-row">
+          <span class="event-name">📐 Skidpad</span>
+          <div class="bar" style="width:30px"></div>
+          <span class="points-badge" style="color:var(--red)">75</span>
+        </div>
+        <div class="points-row">
+          <span class="event-name">🚀 Acceleration</span>
+          <div class="bar" style="width:30px"></div>
+          <span class="points-badge" style="color:var(--red)">75</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="memory-box" style="margin-top:1.5rem">
+    <div class="memory-label">🧠 Points Memory — Dynamic Events Order by Points</div>
+    <div class="mnemonic">250 · 100 · 100 · 75 · 75</div>
+    <p>Remember: <strong>Endurance dominates</strong> (250 = 25% of all points). Autocross + Efficiency tie at 100. Skidpad + Acceleration tie at 75.<br>
+    Static total = <strong>400 pts</strong> · Dynamic total = <strong>600 pts</strong> (60/40 split)</p>
+  </div>
+
+  <div class="subhead">Concept Class — Max 460 pts</div>
+  <div class="grid grid-4">
+    <div class="num-card"><div class="big-num" style="color:var(--yellow)">150</div><div class="num-label">Engineering Design</div></div>
+    <div class="num-card"><div class="big-num" style="color:var(--yellow)">150</div><div class="num-label">Cost & Manufacturing</div></div>
+    <div class="num-card"><div class="big-num" style="color:var(--yellow)">120</div><div class="num-label">Business Plan</div></div>
+    <div class="num-card"><div class="big-num" style="color:var(--yellow)">40</div><div class="num-label">Lap Time Simulation</div></div>
+  </div>
+
+  <div class="tip-box" style="margin-top:1.5rem">
+    <div class="tip-label">💡 Key Fact</div>
+    If <strong>no team finishes a dynamic event</strong>, no Overall Winner award is given for that class (A1.2.7).
+    Official language of the competition is <strong>English</strong>.
+  </div>
+
+</div>
+
+
+<!-- ===== ADMIN ===== -->
+<div class="tab-panel" id="tab-admin">
+
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(51,153,255,0.12);">📋</div>
+    <div>
+      <h2>Administrative Rules (Section A)</h2>
+      <p>Eligibility, conduct, documentation and general rules</p>
+    </div>
+  </div>
+
+  <div class="subhead">Vehicle Eligibility (A2)</div>
+  <div class="grid grid-2">
+    <div class="card blue">
+      <h3>New Vehicle Rule</h3>
+      <div class="card-title">One Year Only</div>
+      <p>A vehicle competes for <strong>one competition year</strong> only, starting from Day 1 on-site. Must have a newly manufactured chassis with <strong>significant Primary Structure changes</strong> vs predecessor.</p>
+    </div>
+    <div class="card blue">
+      <h3>Chassis Reuse</h3>
+      <div class="card-title">Apply via FSQD</div>
+      <p>Submit reuse request before the SES deadline. Approved by Chief Judge — decision is <strong>final</strong>. May attract <strong>Design Event penalty points</strong>. DV vehicles may always reuse a previous chassis.</p>
+    </div>
+  </div>
+
+  <div class="subhead">Team Member Requirements (A4)</div>
+  <div class="grid grid-3">
+    <div class="card green">
+      <h3>Age</h3>
+      <div class="card-title">18+ Years</div>
+      <p>All team members must be at least 18 years old (A4.2.6).</p>
+    </div>
+    <div class="card green">
+      <h3>Student Status</h3>
+      <div class="card-title">Enrolled Student</div>
+      <p>Must be enrolled in a degree programme. Graduates remain eligible for <strong>7 months</strong> post-graduation.</p>
+    </div>
+    <div class="card green">
+      <h3>Driver Licence</h3>
+      <div class="card-title">Valid Licence</div>
+      <p>Drivers need a valid, government-issued, photographic driver's licence or a recognised motorsport licence.</p>
+    </div>
+    <div class="card green">
+      <h3>IMechE Membership</h3>
+      <div class="card-title">Required (UK Teams)</div>
+      <p>UK students must be IMechE members. <strong>Student Affiliate is FREE</strong>. International students may use their home engineering institution.</p>
+    </div>
+    <div class="card green">
+      <h3>No Pro Drivers</h3>
+      <div class="card-title">Banned</div>
+      <p>Drivers who have competed for a professional racing team in a national/international series may <strong>not drive</strong> at any event.</p>
+    </div>
+    <div class="card green">
+      <h3>One Team Only</h3>
+      <div class="card-title">No Dual Teams</div>
+      <p>A team member may only be part of one team and work on one vehicle (A4.2.1). Penalty: 25 pts.</p>
+    </div>
+  </div>
+
+  <div class="subhead">Key Roles</div>
+  <div class="grid grid-2">
+    <div class="card yellow">
+      <h3>[EV Only] Electrical System Officer (ESO)</h3>
+      <p>• At least one ESO required per EV team<br>
+      • Only person who can declare vehicle electrically safe<br>
+      • Must accompany vehicle whenever moved<br>
+      • Contactable by phone at all times<br>
+      • <strong>Cannot be a driver</strong> unless second ESO is named<br>
+      • Must have HV training — details in ESO/ESA form</p>
+    </div>
+    <div class="card yellow">
+      <h3>Faculty Advisor</h3>
+      <p>• Must accompany team to the live event<br>
+      • Official representative of the university<br>
+      • If absent: must send a signed letter nominating a replacement<br>
+      • <strong>May not design, build or repair</strong> any part of the vehicle<br>
+      • May advise on general engineering theory only</p>
+    </div>
+  </div>
+
+  <div class="subhead">Rules of Conduct — Key Penalties</div>
+  <ul class="rules-list">
+    <li>
+      <span class="rule-id">A3.2.1</span>
+      <span>Failure to follow an official's instruction: <span class="hl-red">–25 points</span></span>
+    </li>
+    <li>
+      <span class="rule-id">A3.3.1</span>
+      <span>Argument with or disobedience to any official: <span class="hl-red">Disqualification</span></span>
+    </li>
+    <li>
+      <span class="rule-id">A3.4.1</span>
+      <span>Unsportsmanlike conduct: <span class="hl-red">–25 pts</span>. Second violation: <span class="hl-red">Disqualification</span></span>
+    </li>
+    <li>
+      <span class="rule-id">A3.7.3</span>
+      <span>Protests must be filed in writing by the Team Leader with a <span class="hl-yellow">25-point protest bond</span> (forfeited if rejected)</span>
+    </li>
+    <li>
+      <span class="rule-id">A3.9</span>
+      <span>Covering/obscuring a competing car: up to <span class="hl-red">–50 pts</span> at Chief Judge's discretion</span>
+    </li>
+  </ul>
+
+  <div class="subhead">Insurance (A4.10)</div>
+  <div class="warn-box">
+    <div class="warn-label">⚠️ Critical Requirement</div>
+    All teams must have: (1) <strong>personal accident insurance</strong> for all drivers, and (2) <strong>Public Liability Insurance — minimum £15 million</strong>. Upload certificate via the competition website. Non-UK participants must also show valid <strong>individual health insurance</strong>.
+  </div>
+
+  <div class="subhead">General Rules — Key Numbers to Remember</div>
+  <div class="grid grid-4">
+    <div class="num-card"><div class="big-num" style="color:var(--red)">0.0%</div><div class="num-label">Alcohol limit on site</div></div>
+    <div class="num-card"><div class="big-num" style="color:var(--red)">24h</div><div class="num-label">No alcohol before events</div></div>
+    <div class="num-card"><div class="big-num" style="color:var(--yellow)">2.4GHz</div><div class="num-label">Required telemetry frequency</div></div>
+    <div class="num-card"><div class="big-num" style="color:var(--yellow)">0.5W</div><div class="num-label">Max radio power (PMR446)</div></div>
+  </div>
+
+  <div class="tip-box">
+    <div class="tip-label">💡 Memory Tip — Vehicle Movement Rules</div>
+    Push bar required → driver in cockpit with all equipment (no helmet/arm restraints/balaclava) → walking pace → engine/TS <strong>OFF</strong>. Cars with wings → 2 members either side of front wing. "Running with the car" = tech sticker removed + 1 hour quarantine.
+  </div>
+
+</div>
+
+
+<!-- ===== TECHNICAL ===== -->
+<div class="tab-panel" id="tab-technical">
+
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(255,107,43,0.12);">⚙️</div>
+    <div>
+      <h2>Technical Requirements (Section T)</h2>
+      <p>Vehicle design, structure, chassis, and systems</p>
+    </div>
+  </div>
+
+  <div class="subhead">Critical Dimensions — Must Memorise</div>
+  <div class="grid grid-4">
+    <div class="num-card"><div class="big-num" style="color:var(--orange)">1525<span style="font-size:1.2rem">mm</span></div><div class="num-label">Minimum wheelbase</div></div>
+    <div class="num-card"><div class="big-num" style="color:var(--orange)">30<span style="font-size:1.2rem">mm</span></div><div class="num-label">Min ground clearance</div></div>
+    <div class="num-card"><div class="big-num" style="color:var(--orange)">75%</div><div class="num-label">Min track ratio (narrow/wide)</div></div>
+    <div class="num-card"><div class="big-num" style="color:var(--orange)">50<span style="font-size:1.2rem">mm</span></div><div class="num-label">Min wheel travel</div></div>
+    <div class="num-card"><div class="big-num" style="color:var(--orange)">25<span style="font-size:1.2rem">mm</span></div><div class="num-label">Min jounce (driver seated)</div></div>
+    <div class="num-card"><div class="big-num" style="color:var(--orange)">7°</div><div class="num-label">Max steering free play</div></div>
+    <div class="num-card"><div class="big-num" style="color:var(--orange)">250<span style="font-size:1.2rem">mm</span></div><div class="num-label">Max steering wheel setback from front hoop</div></div>
+    <div class="num-card"><div class="big-num" style="color:var(--orange)">6°</div><div class="num-label">Max rear wheel steering angle</div></div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-label">🧠 Dimension Mnemonic — "1-3-7-5 is Minimum Wheelbase"</div>
+    <div class="mnemonic">15–30–50–75</div>
+    <p><strong>15</strong>25mm wheelbase · <strong>30</strong>mm ground clearance · <strong>50</strong>mm wheel travel · <strong>75</strong>% track ratio<br>Count up: 15 → 30 → 50 → 75 (all minimums)</p>
+  </div>
+
+  <div class="subhead">Primary Structure — Steel Tube Requirements (T3.2.1)</div>
+  <div class="card orange" style="overflow-x:auto">
+    <h3>Minimum Steel Tube Specs</h3>
+    <table style="width:100%; border-collapse:collapse; font-size:0.88rem; margin-top:0.75rem">
+      <thead>
+        <tr style="border-bottom:1px solid rgba(255,255,255,0.1)">
+          <th style="text-align:left; padding:0.5rem; color:var(--muted); font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase">Application</th>
+          <th style="text-align:center; padding:0.5rem; color:var(--muted); font-size:0.7rem">Min CSA</th>
+          <th style="text-align:center; padding:0.5rem; color:var(--muted); font-size:0.7rem">Min Wall</th>
+          <th style="text-align:center; padding:0.5rem; color:var(--muted); font-size:0.7rem">Min I</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+          <td style="padding:0.5rem">Main/Front Hoops, Shoulder Harness Bar</td>
+          <td style="text-align:center; padding:0.5rem; color:var(--orange); font-weight:600">173 mm²</td>
+          <td style="text-align:center; padding:0.5rem; color:var(--orange); font-weight:600">2.0 mm</td>
+          <td style="text-align:center; padding:0.5rem; color:var(--orange); font-weight:600">11320 mm⁴</td>
+        </tr>
+        <tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+          <td style="padding:0.5rem">Side Impact, Front Bulkhead, Roll Hoop Bracing, Harness Attachments</td>
+          <td style="text-align:center; padding:0.5rem; color:var(--yellow); font-weight:600">119 mm²</td>
+          <td style="text-align:center; padding:0.5rem; color:var(--yellow); font-weight:600">1.2 mm</td>
+          <td style="text-align:center; padding:0.5rem; color:var(--yellow); font-weight:600">8509 mm⁴</td>
+        </tr>
+        <tr>
+          <td style="padding:0.5rem">Front Bulkhead Support, Main Hoop Bracing Supports</td>
+          <td style="text-align:center; padding:0.5rem; color:var(--green); font-weight:600">91 mm²</td>
+          <td style="text-align:center; padding:0.5rem; color:var(--green); font-weight:600">1.2 mm</td>
+          <td style="text-align:center; padding:0.5rem; color:var(--green); font-weight:600">6695 mm⁴</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="memory-box" style="margin-top:1rem">
+    <div class="memory-label">🧠 Steel Specs Mnemonic — Descending: 173 → 119 → 91</div>
+    <div class="mnemonic">"Hoops Need the Most · Middle Needs Less · Supports Need Least"</div>
+    <p>Wall: Hoops = <strong>2.0mm</strong>, everything else = <strong>1.2mm</strong>. Anything &lt;1.2mm wall or &lt;6695mm⁴ I = <strong>non-structural</strong> (ignored).</p>
+  </div>
+
+  <div class="subhead">Steel Material Properties (T3.2.4)</div>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Non-Welded (Continuous)</h3>
+      <ul style="list-style:none; font-size:0.88rem; margin-top:0.5rem;">
+        <li style="padding:0.3rem 0">Young's Modulus E = <span class="hl-yellow">200 GPa</span></li>
+        <li style="padding:0.3rem 0">Yield Strength Sy = <span class="hl-yellow">305 MPa</span></li>
+        <li style="padding:0.3rem 0">Ultimate Strength Su = <span class="hl-yellow">365 MPa</span></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Welded (Joints)</h3>
+      <ul style="list-style:none; font-size:0.88rem; margin-top:0.5rem;">
+        <li style="padding:0.3rem 0">Yield Strength Sy = <span class="hl-red">180 MPa</span></li>
+        <li style="padding:0.3rem 0">Ultimate Strength Su = <span class="hl-red">300 MPa</span></li>
+      </ul>
+      <p style="margin-top:0.5rem; font-size:0.8rem">Note: Use <em>lower</em> of datasheet or above values</p>
+    </div>
+  </div>
+
+  <div class="subhead">Vehicle Configuration Rules (T2)</div>
+  <ul class="rules-list">
+    <li><span class="rule-id">T2.1.2</span><span>Must be <strong>open-wheeled, single seat, open cockpit</strong> (formula style) with 4 wheels not in a straight line</span></li>
+    <li><span class="rule-id">T2.2.4</span><span>All bodywork edges that could contact a pedestrian: minimum <span class="hl-yellow">3mm radius</span></span></li>
+    <li><span class="rule-id">T2.2.5</span><span>Bodywork in front of front wheels: minimum <span class="hl-yellow">38mm radius</span> extending at least <span class="hl-yellow">45°</span></span></li>
+    <li><span class="rule-id">T2.3.2</span><span>Minimum static ground clearance (including driver): <span class="hl-orange">30mm</span></span></li>
+    <li><span class="rule-id">T2.4.6</span><span>Wheel spacers permitted. <strong>Laminated or multiple spacers per wheel prohibited</strong></span></li>
+    <li><span class="rule-id">T2.5.3</span><span>Tyre warmers are <strong>NOT allowed</strong></span></li>
+    <li><span class="rule-id">T2.5.4</span><span>Special traction agents: <strong>PROHIBITED</strong> on tyres or track surface</span></li>
+    <li><span class="rule-id">T2.6.1</span><span>Steering using cables or belts: <strong>PROHIBITED</strong> (except DV autonomous actuators)</span></li>
+    <li><span class="rule-id">T2.7.1</span><span>Minimum wheelbase: <span class="hl-orange">1525mm</span></span></li>
+  </ul>
+
+  <div class="subhead">Tyre Rules (T2.5)</div>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Dry Tyres</h3>
+      <p>Tyres on the vehicle at technical inspection = defined as dry tyres. Same manufacturer, size and compound on the same axle.</p>
+    </div>
+    <div class="card">
+      <h3>Wet Tyres</h3>
+      <p>Any size/type of treaded or grooved tyre. Grooves must be moulded in by manufacturer (or cut by manufacturer/agent). Minimum tread depth: <span class="hl-yellow">2.4mm</span>. One set per type for all dynamic events.</p>
+    </div>
+  </div>
+
+  <div class="subhead">Driver Egress (T4.3 / IN13)</div>
+  <div class="warn-box">
+    <div class="warn-label">⚠️ Critical Test Requirement</div>
+    All drivers must be able to exit to the side of the vehicle in <strong>no more than 5 seconds</strong>. Egress starts with driver fully seated, hands on steering wheel, wearing required driver equipment. Egress stops when <strong>both feet are on the ground</strong>.
+  </div>
+
+</div>
+
+
+<!-- ===== INSPECTIONS ===== -->
+<div class="tab-panel" id="tab-inspections">
+
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(153,102,255,0.12);">🔍</div>
+    <div>
+      <h2>Technical Inspections (Section IN)</h2>
+      <p>Scrutineering sequence — must pass before competing dynamically</p>
+    </div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-label">🧠 Inspection Order Mnemonic</div>
+    <div class="mnemonic">"Safe Cars Make Every Race Noble"</div>
+    <p><strong>S</strong>afety · <strong>C</strong>hassis (Mech) · <strong>M</strong>ech Inspection · <strong>E</strong>V Battery · <strong>R</strong>ain Test · <strong>N</strong>oise & Brake Tests → then <strong>Egress</strong> → <strong>Weigh</strong></p>
+  </div>
+
+  <div class="subhead">Inspection Sequence</div>
+  <div class="stepper">
+    <div class="step" data-n="1">
+      <h4>Safety Inspection <span class="tag tag-cv">All</span></h4>
+      <p>Motorsport UK safety inspection. Basic safety equipment check.</p>
+    </div>
+    <div class="step" data-n="2">
+      <h4>Accumulator Inspection <span class="tag tag-ev">EV Only</span></h4>
+      <p>Battery pack check. Must pass before electrical inspection (IN3).</p>
+    </div>
+    <div class="step" data-n="3">
+      <h4>Electrical Inspection <span class="tag tag-ev">EV Only</span></h4>
+      <p>Full electrical system review including TS safety circuits (IN4).</p>
+    </div>
+    <div class="step" data-n="4">
+      <h4>Mechanical Inspection <span class="tag tag-cv">All</span></h4>
+      <p>Chassis, suspension, brakes, bodywork, driver fit (IN5).</p>
+    </div>
+    <div class="step" data-n="5">
+      <h4>Autonomous System Inspection <span class="tag tag-dv">DV Only</span></h4>
+      <p>AS hardware, software, safety mechanisms (IN6).</p>
+    </div>
+    <div class="step" data-n="6">
+      <h4>Tilt Test <span class="tag tag-cv">All</span></h4>
+      <p>Vehicle tilted to check for leaks and stability (IN7). CV must pass to be fuelled during events.</p>
+    </div>
+    <div class="step" data-n="7">
+      <h4>Vehicle Weighing <span class="tag tag-cv">All</span></h4>
+      <p>Weight measured with driver (IN8).</p>
+    </div>
+    <div class="step" data-n="8">
+      <h4>Rain Test <span class="tag tag-ev">EV Only</span></h4>
+      <p>IP rating / sealing verification for HV components (IN9).</p>
+    </div>
+    <div class="step" data-n="9">
+      <h4>Noise Test <span class="tag tag-cv">All</span></h4>
+      <p>Maximum permitted noise level checked (IN10).</p>
+    </div>
+    <div class="step" data-n="10">
+      <h4>Brake Test <span class="tag tag-cv">All</span></h4>
+      <p>All four wheels must lock simultaneously under braking (IN11).</p>
+    </div>
+    <div class="step" data-n="11">
+      <h4>Driver Egress Test <span class="tag tag-cv">All</span></h4>
+      <p>All drivers must exit in ≤5 seconds. Tallest driver tested first (IN13).</p>
+    </div>
+    <div class="step" data-n="12">
+      <h4>Post-Event Inspection <span class="tag tag-cv">All</span></h4>
+      <p>After endurance — must pass to score endurance points (IN12).</p>
+    </div>
+  </div>
+
+  <div class="tip-box" style="margin-top:1rem">
+    <div class="tip-label">💡 Key Rule</div>
+    <strong>No approved SES = no dynamic events.</strong> SES must be submitted and get 'Approved' before scrutineering. Failed SES can be resubmitted as many times as needed before the resubmission deadline.
+  </div>
+
+</div>
+
+
+<!-- ===== STATIC EVENTS ===== -->
+<div class="tab-panel" id="tab-static">
+
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(245,196,0,0.12);">🏆</div>
+    <div>
+      <h2>Static Events (Section S)</h2>
+      <p>BPP, Cost & Manufacturing, Engineering Design, LTS</p>
+    </div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-label">🧠 Static Events Order of Points (FS Class)</div>
+    <div class="mnemonic">Design 150 · BPP 115 · Cost 115 · LTS 20</div>
+    <p>Think "<strong>D-B-C-L</strong>" — <strong>D</strong>esign Best, <strong>C</strong>ost alongside, <strong>L</strong>ast (LTS smallest)</p>
+  </div>
+
+  <!-- BPP -->
+  <div class="subhead">Business Plan Presentation — BPP (S2) · 115 pts</div>
+  <div class="grid grid-2">
+    <div class="card yellow">
+      <h3>Format</h3>
+      <ul style="list-style:none; font-size:0.88rem">
+        <li style="padding:0.25rem 0">⏱ <strong>10 min</strong> presentation (min 9 min, max 11 min)</li>
+        <li style="padding:0.25rem 0">❓ <strong>5 min</strong> Q&A</li>
+        <li style="padding:0.25rem 0">💬 <strong>5–10 min</strong> judge feedback</li>
+        <li style="padding:0.25rem 0">📄 Supporting material: max <strong>8 sides A4</strong></li>
+        <li style="padding:0.25rem 0">🎭 Present as a <strong>company, not students</strong> — judges = potential investors</li>
+      </ul>
+    </div>
+    <div class="card yellow">
+      <h3>Required Content</h3>
+      <ul style="list-style:none; font-size:0.88rem">
+        <li style="padding:0.25rem 0">✅ Potential customers</li>
+        <li style="padding:0.25rem 0">✅ Marketing strategy</li>
+        <li style="padding:0.25rem 0">✅ Development & production proposal</li>
+        <li style="padding:0.25rem 0">✅ Financial proposition</li>
+        <li style="padding:0.25rem 0">✅ The Special Condition (set before event)</li>
+        <li style="padding:0.25rem 0">🎬 Up to 5 finalists compete in BPP Final</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="warn-box">
+    <div class="warn-label">⚠️ BPP Timing Rules</div>
+    Teams arriving <strong>more than 11 minutes late</strong> are deemed to have missed their slot. Presentation &lt;9 min or &gt;11 min = penalty. Judges <strong>will stop</strong> any presentation exceeding 11 minutes.
+  </div>
+
+  <!-- COST -->
+  <div class="subhead">Cost & Manufacturing Event (S3) · 115 pts</div>
+  <div class="grid grid-2">
+    <div class="card orange">
+      <h3>FS Class Scoring Breakdown</h3>
+      <ul style="list-style:none; font-size:0.88rem; margin-top:0.5rem">
+        <li style="display:flex; justify-content:space-between; padding:0.3rem 0; border-bottom:1px solid rgba(255,255,255,0.05)"><span>Content & Completeness of BOM</span><span class="hl-orange">20</span></li>
+        <li style="display:flex; justify-content:space-between; padding:0.3rem 0; border-bottom:1px solid rgba(255,255,255,0.05)"><span>Realism of Cost Estimation</span><span class="hl-orange">30</span></li>
+        <li style="display:flex; justify-content:space-between; padding:0.3rem 0; border-bottom:1px solid rgba(255,255,255,0.05)"><span>Realism of Carbon Footprint</span><span class="hl-orange">15</span></li>
+        <li style="display:flex; justify-content:space-between; padding:0.3rem 0; border-bottom:1px solid rgba(255,255,255,0.05)"><span>Cost Understanding</span><span class="hl-orange">40</span></li>
+        <li style="display:flex; justify-content:space-between; padding:0.3rem 0"><span>Cost Final</span><span class="hl-orange">10</span></li>
+      </ul>
+    </div>
+    <div class="card orange">
+      <h3>BOM Missing Item Penalties</h3>
+      <ul style="list-style:none; font-size:0.88rem; margin-top:0.5rem">
+        <li style="display:flex; justify-content:space-between; padding:0.3rem 0; border-bottom:1px solid rgba(255,255,255,0.05)"><span>Missing Assembly</span><span class="hl-red">–5 pts</span></li>
+        <li style="display:flex; justify-content:space-between; padding:0.3rem 0; border-bottom:1px solid rgba(255,255,255,0.05)"><span>Missing Part</span><span class="hl-red">–3 pts</span></li>
+        <li style="display:flex; justify-content:space-between; padding:0.3rem 0"><span>Missing Process/Material</span><span class="hl-red">–1 pt</span></li>
+      </ul>
+      <div class="tip-box" style="margin-top:1rem; padding:0.6rem">
+        <div class="tip-label">Format</div>
+        All costs in <strong>EUR</strong>. Metric units only. Vehicle must be fully assembled, ready-to-race for judging.
+      </div>
+    </div>
+  </div>
+
+  <!-- DESIGN -->
+  <div class="subhead">Engineering Design Event (S5) · 150 pts</div>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>EDR Requirements</h3>
+      <ul style="list-style:none; font-size:0.88rem">
+        <li style="padding:0.25rem 0">📄 Max <strong>8 pages total</strong></li>
+        <li style="padding:0.25rem 0">📝 Max <strong>5 pages content</strong> (text, pics, graphs)</li>
+        <li style="padding:0.25rem 0">📐 Exactly <strong>3 pages of drawings</strong> (front, top, side — one per page)</li>
+        <li style="padding:0.25rem 0">❌ No newspaper-style columns or text wrapped around images</li>
+        <li style="padding:0.25rem 0">📎 Cover & table of contents count as text pages</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Design Judging Key Facts</h3>
+      <ul style="list-style:none; font-size:0.88rem">
+        <li style="padding:0.25rem 0">🏆 Maximum: <strong>150 pts</strong></li>
+        <li style="padding:0.25rem 0">⚠️ Up to <strong>–50 pts</strong> for inability to explain engineering decisions</li>
+        <li style="padding:0.25rem 0">🪑 Judges may sit in vehicle to check ergonomics</li>
+        <li style="padding:0.25rem 0">✅ Vehicle must be <strong>fully assembled & ready-to-race</strong></li>
+        <li style="padding:0.25rem 0">🏅 Must pass all scrutineering to enter Design Final</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- LTS -->
+  <div class="subhead">Lap Time Simulation — LTS (S7) · 20 pts (FS) / 40 pts (Concept)</div>
+  <div class="grid grid-2">
+    <div class="card green">
+      <h3>LTS Vehicle Evaluation</h3>
+      <p>Use IPG CarMaker software to find the optimal setup across <strong>4 powertrain types</strong> × <strong>2 aero configs</strong>. Best combined Acceleration + Skidpad + Sprint score wins. Only <strong>one final submission</strong> allowed.</p>
+    </div>
+    <div class="card green">
+      <h3>4 Powertrain Types</h3>
+      <ul style="list-style:none; font-size:0.88rem; margin-top:0.5rem">
+        <li style="padding:0.2rem 0">🔹 NA Gasoline</li>
+        <li style="padding:0.2rem 0">🔹 Turbo-Charged Gasoline</li>
+        <li style="padding:0.2rem 0">🔹 Single Motor EV</li>
+        <li style="padding:0.2rem 0">🔹 Four Motor EV</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="warn-box" style="margin-top:1rem">
+    <div class="warn-label">⚠️ Static No-Show Penalty</div>
+    Failing to notify officials of inability to attend a static event: up to <strong>–100 points</strong> per absent notification from the overall score (on top of any other non-attendance penalties). Always notify in time!
+  </div>
+
+</div>
+
+
+<!-- ===== DYNAMIC EVENTS ===== -->
+<div class="tab-panel" id="tab-dynamic">
+
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(232,0,45,0.12);">🏁</div>
+    <div>
+      <h2>Dynamic Events (Section D)</h2>
+      <p>Skidpad, Acceleration, Autocross, Endurance, Efficiency</p>
+    </div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-label">🧠 Dynamic Events Mnemonic — "SAAE + E"</div>
+    <div class="mnemonic">Skid · Accel · Auto · Enduro</div>
+    <p>Then add <strong>Efficiency</strong> (tied to Endurance). Driver limit: min <strong>4</strong>, max <strong>6</strong> drivers per team. Each driver in max <strong>2</strong> events. Endurance + Efficiency = <strong>1 event</strong>.</p>
+  </div>
+
+  <div class="subhead">Driver Rules</div>
+  <div class="grid grid-3">
+    <div class="num-card"><div class="big-num" style="color:var(--red)">4–6</div><div class="num-label">Drivers per team</div></div>
+    <div class="num-card"><div class="big-num" style="color:var(--red)">2</div><div class="num-label">Max events per driver</div></div>
+    <div class="num-card"><div class="big-num" style="color:var(--red)">4</div><div class="num-label">Team members in dynamic area</div></div>
+  </div>
+
+  <div class="subhead">Flag Signals — Must Know All</div>
+  <div class="card" style="margin-bottom:1.25rem">
+    <div class="flag-item">
+      <div class="flag-block" style="background:#00c47a; color:white">🟩</div>
+      <div><strong>GREEN</strong> — Session started / re-enter / resume speed after yellow</div>
+    </div>
+    <div class="flag-item">
+      <div class="flag-block" style="background:#f5c400; color:#000">🟨</div>
+      <div><strong>YELLOW (Stationary)</strong> — Danger ahead. Slow down, no overtaking</div>
+    </div>
+    <div class="flag-item">
+      <div class="flag-block" style="background:#f5c400; color:#000">⚡🟨</div>
+      <div><strong>YELLOW (Waved)</strong> — Greater danger. Prepare to stop or leave track</div>
+    </div>
+    <div class="flag-item">
+      <div class="flag-block" style="background:linear-gradient(to right, red 50%, yellow 50%); color:white; font-size:0.6rem">R/Y</div>
+      <div><strong>RED/YELLOW STRIPED</strong> — Slippery surface or debris. Prepare for evasive action</div>
+    </div>
+    <div class="flag-item">
+      <div class="flag-block" style="background:#3399ff; color:white">🔵</div>
+      <div><strong>BLUE</strong> — Pull into passing zone. You are being overtaken by a faster car</div>
+    </div>
+    <div class="flag-item">
+      <div class="flag-block" style="background:#e8002d; color:white">🔴</div>
+      <div><strong>RED</strong> — Immediate safe, controlled stop. Follow marshal instructions</div>
+    </div>
+    <div class="flag-item">
+      <div class="flag-block" style="background:#000; color:white">⚫</div>
+      <div><strong>BLACK</strong> — Pull into driver change area at end of lap. Penalty = discussion time with official</div>
+    </div>
+    <div class="flag-item">
+      <div class="flag-block" style="background:#000; color:orange; font-size:0.6rem">🔴⚫</div>
+      <div><strong>BLACK + ORANGE DOT</strong> — Mechanical black flag. Mandatory mechanical inspection</div>
+    </div>
+    <div class="flag-item" style="border:none">
+      <div class="flag-block" style="background:repeating-linear-gradient(45deg,#000 0px,#000 5px,#fff 5px,#fff 10px);">✔</div>
+      <div><strong>CHEQUERED</strong> — Session complete. Exit at first opportunity</div>
+    </div>
+  </div>
+
+  <div class="subhead">Skidpad (D4) — 75 pts</div>
+  <div class="grid grid-2">
+    <div class="card red">
+      <h3>Track Layout</h3>
+      <p>Two pairs of concentric circles, figure-of-eight pattern.<br>
+      • Circle centres: <span class="hl-yellow">18.25m apart</span><br>
+      • Inner circle diameter: <span class="hl-yellow">15.25m</span><br>
+      • Outer circle diameter: <span class="hl-yellow">21.25m</span><br>
+      • Driving path width: <span class="hl-yellow">3m</span></p>
+    </div>
+    <div class="card red">
+      <h3>Procedure</h3>
+      <p>4 initial runs (2 drivers × 2 runs each). Unlimited additional runs after.<br>
+      Pattern: 1 warm-up lap right → 1 timed right → 1 warm-up left → 1 timed left → exit.<br>
+      Run time = average of timed left + right + penalties.</p>
+    </div>
+  </div>
+  <div class="tip-box">
+    <div class="tip-label">💡 Scoring</div>
+    5 pts guaranteed for completing one run without DNF/DQ. Additional pts if time &lt; Tmax (125% of fastest time).
+  </div>
+
+  <div class="subhead">Acceleration (D5) — 75 pts</div>
+  <div class="grid grid-2">
+    <div class="card red">
+      <h3>Track</h3>
+      <p><span class="hl-yellow">75m</span> straight line. At least 3m wide. Cones every ~5m. Standing start (front 0.30m behind starting line).</p>
+    </div>
+    <div class="card red">
+      <h3>Top Six Runoff</h3>
+      <p>Top 6 fastest cars qualify. Reversed order start (slowest first). Each driver gets 1 run. Points: 1st=5, 2nd=4, 3rd=3, 4th=2, 5th=1, 6th=0.</p>
+    </div>
+  </div>
+  <div class="tip-box">
+    <div class="tip-label">💡 Scoring</div>
+    5 pts guaranteed for completing one run. Additional pts if time &lt; Tmax (150% of fastest time).
+  </div>
+
+  <div class="subhead">Autocross (D6) — 100 pts</div>
+  <ul class="rules-list">
+    <li><span class="rule-id">D6.1</span><span>Handling track. Straights ≤80m. Constant turns ≤50m diameter. Hairpins ≥9m OD. Slaloms 7.5–12m spacing. Min 3m wide. Length &lt;1.5km</span></li>
+    <li><span class="rule-id">D6.2.1</span><span>4 initial runs (2 drivers × 2). Unlimited additional after</span></li>
+    <li><span class="rule-id">D6.4.2</span><span>Additional pts if time &lt; Tmax = <span class="hl-yellow">145%</span> of fastest time. Guaranteed 5 pts for finishing</span></li>
+  </ul>
+
+  <div class="subhead">Endurance (D7) — 250 pts + Efficiency 100 pts</div>
+  <div class="grid grid-2">
+    <div class="card red">
+      <h3>Track Specs</h3>
+      <p>Straights ≤80m · Turns ≤50m dia · Hairpins ≥9m OD · Slaloms 9–15m · Min 3m wide<br>
+      Lap ≈ <span class="hl-yellow">1km</span> · Total distance ≈ <span class="hl-yellow">22km</span></p>
+    </div>
+    <div class="card red">
+      <h3>Driver Change</h3>
+      <p>Mandatory at <span class="hl-yellow">midpoint (11km each)</span>.<br>
+      Only 3 team members (incl driver) in change area.<br>
+      EV: one must be an ESO.<br>
+      Time: <span class="hl-yellow">3 min to change driver</span> + <span class="hl-yellow">1 min to restart</span>.<br>
+      Excess time added to final time.</p>
+    </div>
+  </div>
+  <div class="tip-box">
+    <div class="tip-label">💡 Endurance Scoring</div>
+    25 pts guaranteed for finishing. Additional pts if time &lt; Tmax (145% of fastest). Vehicle <strong>must pass post-event inspection</strong> (IN12) to score. Vehicles off-pace (&gt;145% fastest lap) must exit immediately.
+  </div>
+
+  <div class="subhead">Efficiency CO₂ Conversion Factors (D7.9.2)</div>
+  <div class="grid grid-3">
+    <div class="num-card"><div class="big-num" style="color:var(--orange); font-size:2rem">799g</div><div class="num-label">CO₂/litre — E10 Gasoline</div></div>
+    <div class="num-card"><div class="big-num" style="color:var(--blue); font-size:2rem">143g</div><div class="num-label">CO₂/kWh — Electric</div></div>
+    <div class="num-card"><div class="big-num" style="color:var(--green); font-size:2rem">571g</div><div class="num-label">CO₂/litre — E85</div></div>
+  </div>
+  <div class="warn-box" style="margin-top:1rem">
+    <div class="warn-label">⚠️ Efficiency Zero Points Conditions</div>
+    Zero efficiency points if: (1) avg endurance lap time &gt;145% of fastest team's avg, OR (2) avg fuel consumption &gt;26 litres/100km or equivalent of <strong>20 kg CO₂/100km</strong>.
+  </div>
+
+  <div class="subhead">Tyre Changes During Events (D3)</div>
+  <div class="card" style="overflow-x:auto">
+    <table style="width:100%; border-collapse:collapse; font-size:0.85rem">
+      <thead>
+        <tr style="border-bottom:1px solid var(--border)">
+          <th style="padding:0.5rem; text-align:left; color:var(--muted); font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase">Condition</th>
+          <th style="padding:0.5rem; text-align:center; color:var(--muted); font-size:0.7rem">Dry → Dry</th>
+          <th style="padding:0.5rem; text-align:center; color:var(--muted); font-size:0.7rem">Dry → Damp</th>
+          <th style="padding:0.5rem; text-align:center; color:var(--muted); font-size:0.7rem">Dry → Wet</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:0.5rem; color:var(--orange); font-weight:600">On Dry Tyres</td>
+          <td style="text-align:center; padding:0.5rem">—</td>
+          <td style="text-align:center; padding:0.5rem; color:var(--green)">May change</td>
+          <td style="text-align:center; padding:0.5rem; color:var(--red)">Must change</td>
+        </tr>
+        <tr>
+          <td style="padding:0.5rem; color:var(--blue); font-weight:600">On Wet Tyres</td>
+          <td style="text-align:center; padding:0.5rem; color:var(--green)">May change</td>
+          <td style="text-align:center; padding:0.5rem; color:var(--green)">May change</td>
+          <td style="text-align:center; padding:0.5rem">—</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:0.8rem; color:var(--muted); margin-top:0.75rem">At endurance, all tyre changes must occur in the driver change area. Only one set of tyres per type for all dynamic events.</p>
+  </div>
+
+</div>
+
+
+<!-- ===== PENALTIES ===== -->
+<div class="tab-panel" id="tab-penalties">
+
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(232,0,45,0.12);">⚠️</div>
+    <div>
+      <h2>Penalties Reference Card</h2>
+      <p>Dynamic penalties, conduct penalties, and disqualification conditions</p>
+    </div>
+  </div>
+
+  <div class="subhead">Dynamic Event Penalties (D9.1.7)</div>
+  <div class="card" style="overflow-x:auto; margin-bottom:1.25rem">
+    <table class="penalty-table">
+      <thead>
+        <tr>
+          <th>Violation</th>
+          <th>Acceleration</th>
+          <th>Skidpad</th>
+          <th>Autocross</th>
+          <th>Endurance</th>
+          <th>Trackdrive</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cone DOO (Down or Out)</td>
+          <td><span class="pen-val pen-time">+2s</span></td>
+          <td><span class="pen-val pen-time">+0.2s</span></td>
+          <td><span class="pen-val pen-time">+2s</span></td>
+          <td><span class="pen-val pen-time">+2s</span></td>
+          <td><span class="pen-val pen-time">+2s</span></td>
+        </tr>
+        <tr>
+          <td>Off-Course (OC)</td>
+          <td><span class="pen-val pen-dnf">DNF</span></td>
+          <td><span class="pen-val pen-dnf">DNF</span></td>
+          <td><span class="pen-val pen-time">+10s</span></td>
+          <td><span class="pen-val pen-time">+10s</span></td>
+          <td><span class="pen-val pen-time">+10s</span></td>
+        </tr>
+        <tr>
+          <td>Unsafe Stop (USS)</td>
+          <td><span class="pen-val pen-dnf">DNF</span></td>
+          <td><span class="pen-val pen-dnf">DNF</span></td>
+          <td><span class="pen-val pen-dnf">DNF</span></td>
+          <td>N/A</td>
+          <td><span class="pen-val pen-pts">–50 pts</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="subhead">Other Dynamic Penalties</div>
+  <ul class="rules-list">
+    <li><span class="rule-id">D9.1.12</span><span>Failure to obey a marshal or flag: <span class="hl-red">+1 minute time penalty</span></span></li>
+    <li><span class="rule-id">D9.1.13</span><span>Reckless/aggressive driving: <span class="hl-red">Black Flag</span> + up to <span class="hl-red">+5 minutes</span>. Continued recklessness: <span class="hl-red">DQ</span></span></li>
+    <li><span class="rule-id">D9.1.14</span><span>Vehicle-to-vehicle contact: <span class="hl-red">+2 minutes up to DQ</span> depending on severity</span></li>
+    <li><span class="rule-id">D9.1.15</span><span>Cannot restart without external assistance: <span class="hl-red">DNF</span> for that run</span></li>
+    <li><span class="rule-id">D9.1.16</span><span>Cannot start after being called to staging line: <span class="hl-red">DQ</span> for that run</span></li>
+    <li><span class="rule-id">D9.2.1</span><span>Running out-of-order (endurance): <span class="hl-red">+2 minutes</span></span></li>
+    <li><span class="rule-id">D9.2.5</span><span>Driver change procedure violation: up to <span class="hl-red">+2 minutes</span></span></li>
+  </ul>
+
+  <div class="subhead">EV Power Violations (D9.4)</div>
+  <div class="warn-box">
+    <div class="warn-label">⚠️ EV Specific</div>
+    Exceeding max power or voltage (after 500ms moving average): <strong>DQ of fastest run</strong> of that event. Two runs with violations = two fastest runs DQ'd. Non-availability of Energy Meter data = treated as a violation.
+  </div>
+
+  <div class="subhead">Administrative / Conduct Penalties</div>
+  <ul class="rules-list">
+    <li><span class="rule-id">A3.2.1</span><span>Failing to follow an official's instruction: <span class="hl-red">–25 pts</span> overall</span></li>
+    <li><span class="rule-id">A3.3.1</span><span>Argument with / disobedience to any official: <span class="hl-red">Immediate Disqualification</span></span></li>
+    <li><span class="rule-id">A3.4.1</span><span>Unsportsmanlike conduct: <span class="hl-red">–25 pts</span>. Second violation: <span class="hl-red">Disqualification</span></span></li>
+    <li><span class="rule-id">A3.9</span><span>Car covering: up to <span class="hl-red">–50 pts</span> at Chief Judge's discretion</span></li>
+    <li><span class="rule-id">A4.2.1</span><span>Team member in multiple teams: <span class="hl-red">–25 pts</span></span></li>
+    <li><span class="rule-id">A6.1.1</span><span>Removing vehicle from competition site after competition begins: <span class="hl-red">Disqualification</span></span></li>
+    <li><span class="rule-id">A6.6.2</span><span>Alcohol level &gt;0.0% on site: <span class="hl-red">Immediate DQ for that member</span>. Second member: <span class="hl-red">Entire team DQ</span></span></li>
+    <li><span class="rule-id">A6.7.9</span><span>"Running with the car": Tech sticker removed + <span class="hl-red">min 1 hour quarantine</span></span></li>
+  </ul>
+
+  <div class="subhead">Document Submission Penalties (Cost Event)</div>
+  <ul class="rules-list">
+    <li><span class="rule-id">S3.9.7</span><span>Incorrectly formatted / missing document: up to <span class="hl-red">–30 pts per document</span> on top of late penalties</span></li>
+    <li><span class="rule-id">S3.3.8</span><span>Presented CRD doesn't match uploaded version: <span class="hl-red">–5 pts</span> from cost event score</span></li>
+    <li><span class="rule-id">S1.1.1</span><span>Static event no-show without notification: up to <span class="hl-red">–100 pts overall</span> per absence</span></li>
+  </ul>
+
+  <div class="memory-box">
+    <div class="memory-label">🧠 Penalty Quick-Reference</div>
+    <div class="mnemonic">25 · 50 · 100 → DQ</div>
+    <p><strong>25</strong> = conduct/instruction breach · <strong>50</strong> = car covering · <strong>100</strong> = no-show without notice · <strong>DQ</strong> = argue with officials / leave site / second alcohol breach</p>
+  </div>
+
+</div>
+
+
+<!-- ===== ACRONYMS ===== -->
+<div class="tab-panel" id="tab-acronyms">
+
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(51,153,255,0.12);">🔤</div>
+    <div>
+      <h2>Key Abbreviations & Acronyms</h2>
+      <p>Master the FSUK vocabulary — these appear everywhere in the rules</p>
+    </div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-label">🧠 Most Critical Acronyms to Know First</div>
+    <div class="mnemonic">ESO · TSAl · TSMS · SES · HVD · IMD · AMS</div>
+    <p>These are used constantly in inspection and safety rules. Know them cold before reading EV sections.</p>
+  </div>
+
+  <div class="subhead">Vehicle Type Codes</div>
+  <div class="acronym-grid">
+    <div class="acro-item"><div class="acro-short">CV</div><div class="acro-long">Internal Combustion Engine Vehicle</div></div>
+    <div class="acro-item"><div class="acro-short">EV</div><div class="acro-long">Electric Vehicle</div></div>
+    <div class="acro-item"><div class="acro-short">AFV</div><div class="acro-long">Alternative Fuel Vehicle</div></div>
+    <div class="acro-item"><div class="acro-short">DV</div><div class="acro-long">Driverless Vehicle</div></div>
+    <div class="acro-item"><div class="acro-short">AS</div><div class="acro-long">Autonomous System</div></div>
+    <div class="acro-item"><div class="acro-short">ADS</div><div class="acro-long">Autonomous Driving System</div></div>
+    <div class="acro-item"><div class="acro-short">DDT</div><div class="acro-long">Dynamic Driving Task Class</div></div>
+  </div>
+
+  <div class="subhead">Electrical System Acronyms</div>
+  <div class="acronym-grid">
+    <div class="acro-item"><div class="acro-short">TS</div><div class="acro-long">Tractive System</div></div>
+    <div class="acro-item"><div class="acro-short">TSAC</div><div class="acro-long">Tractive System Accumulator Container</div></div>
+    <div class="acro-item"><div class="acro-short">TSAL</div><div class="acro-long">Tractive System Active Light</div></div>
+    <div class="acro-item"><div class="acro-short">TSMS</div><div class="acro-long">Tractive System Master Switch</div></div>
+    <div class="acro-item"><div class="acro-short">TSMP</div><div class="acro-long">Tractive System Measuring Point</div></div>
+    <div class="acro-item"><div class="acro-short">AIR</div><div class="acro-long">Accumulator Isolation Relay</div></div>
+    <div class="acro-item"><div class="acro-short">AMS</div><div class="acro-long">Accumulator Management System</div></div>
+    <div class="acro-item"><div class="acro-short">IMD</div><div class="acro-long">Insulation Monitoring Device</div></div>
+    <div class="acro-item"><div class="acro-short">HVD</div><div class="acro-long">High Voltage Disconnect</div></div>
+    <div class="acro-item"><div class="acro-short">HV</div><div class="acro-long">High Voltage</div></div>
+    <div class="acro-item"><div class="acro-short">LV</div><div class="acro-long">Low Voltage</div></div>
+    <div class="acro-item"><div class="acro-short">LVMS</div><div class="acro-long">Low Voltage Master Switch</div></div>
+    <div class="acro-item"><div class="acro-short">LVS</div><div class="acro-long">Low Voltage System</div></div>
+    <div class="acro-item"><div class="acro-short">SDC</div><div class="acro-long">Shutdown Circuit</div></div>
+    <div class="acro-item"><div class="acro-short">R2D</div><div class="acro-long">Ready-to-Drive</div></div>
+    <div class="acro-item"><div class="acro-short">ESO</div><div class="acro-long">Electrical System Officer</div></div>
+    <div class="acro-item"><div class="acro-short">ESA</div><div class="acro-long">Electrical System Advisor</div></div>
+    <div class="acro-item"><div class="acro-short">ESF</div><div class="acro-long">Electrical System Form</div></div>
+  </div>
+
+  <div class="subhead">Structural & Technical</div>
+  <div class="acronym-grid">
+    <div class="acro-item"><div class="acro-short">SES</div><div class="acro-long">Structural Equivalency Spreadsheet</div></div>
+    <div class="acro-item"><div class="acro-short">IA</div><div class="acro-long">Impact Attenuator</div></div>
+    <div class="acro-item"><div class="acro-short">IAD</div><div class="acro-long">Impact Attenuator Data</div></div>
+    <div class="acro-item"><div class="acro-short">AIP</div><div class="acro-long">Anti-Intrusion Plate</div></div>
+    <div class="acro-item"><div class="acro-short">EI</div><div class="acro-long">Flexural Rigidity</div></div>
+    <div class="acro-item"><div class="acro-short">ETC</div><div class="acro-long">Electronic Throttle Control</div></div>
+    <div class="acro-item"><div class="acro-short">APPS</div><div class="acro-long">Accelerator Pedal Position Sensor</div></div>
+    <div class="acro-item"><div class="acro-short">BSPD</div><div class="acro-long">Brake System Plausibility Device</div></div>
+    <div class="acro-item"><div class="acro-short">BOTS</div><div class="acro-long">Brake Over-Travel Switch</div></div>
+    <div class="acro-item"><div class="acro-short">TPS</div><div class="acro-long">Throttle Position Sensor</div></div>
+  </div>
+
+  <div class="subhead">Event & Admin</div>
+  <div class="acronym-grid">
+    <div class="acro-item"><div class="acro-short">BOM</div><div class="acro-long">Bill of Material</div></div>
+    <div class="acro-item"><div class="acro-short">CCBOM</div><div class="acro-long">Costed Carbonised Bill of Material</div></div>
+    <div class="acro-item"><div class="acro-short">CRD</div><div class="acro-long">Cost Report Documents</div></div>
+    <div class="acro-item"><div class="acro-short">BPP</div><div class="acro-long">Business Plan Presentation</div></div>
+    <div class="acro-item"><div class="acro-short">BPPV</div><div class="acro-long">Business Plan Pitch Video</div></div>
+    <div class="acro-item"><div class="acro-short">EDR</div><div class="acro-long">Engineering Design Report</div></div>
+    <div class="acro-item"><div class="acro-short">DSS</div><div class="acro-long">Design Spec Sheet</div></div>
+    <div class="acro-item"><div class="acro-short">DCS</div><div class="acro-long">Design Concept Specification</div></div>
+    <div class="acro-item"><div class="acro-short">CEEF</div><div class="acro-long">Cost & Emissions Explanation File</div></div>
+    <div class="acro-item"><div class="acro-short">FSQD</div><div class="acro-long">Formula Student Questions Database</div></div>
+    <div class="acro-item"><div class="acro-short">TMD</div><div class="acro-long">Team Member Designation</div></div>
+    <div class="acro-item"><div class="acro-short">FTO</div><div class="acro-long">Fuel Type Order</div></div>
+  </div>
+
+  <div class="subhead">Scoring Outcomes</div>
+  <div class="acronym-grid">
+    <div class="acro-item"><div class="acro-short">DNF</div><div class="acro-long">Did Not Finish — 0 pts for that run</div></div>
+    <div class="acro-item"><div class="acro-short">DQ</div><div class="acro-long">Disqualified — 0 pts for that run</div></div>
+    <div class="acro-item"><div class="acro-short">DNA</div><div class="acro-long">Did Not Attempt — 0 pts</div></div>
+    <div class="acro-item"><div class="acro-short">DNS</div><div class="acro-long">Did Not Start</div></div>
+    <div class="acro-item"><div class="acro-short">DOO</div><div class="acro-long">Down or Out (cones)</div></div>
+    <div class="acro-item"><div class="acro-short">OC</div><div class="acro-long">Off-Course</div></div>
+    <div class="acro-item"><div class="acro-short">USS</div><div class="acro-long">Unsafe Stop (DV)</div></div>
+  </div>
+
+  <div class="subhead">Autonomous System</div>
+  <div class="acronym-grid">
+    <div class="acro-item"><div class="acro-short">ASR</div><div class="acro-long">Autonomous System Responsible</div></div>
+    <div class="acro-item"><div class="acro-short">ASMS</div><div class="acro-long">Autonomous System Master Switch</div></div>
+    <div class="acro-item"><div class="acro-short">ASB</div><div class="acro-long">Autonomous System Brake</div></div>
+    <div class="acro-item"><div class="acro-short">ASF</div><div class="acro-long">Autonomous System Form</div></div>
+    <div class="acro-item"><div class="acro-short">ASMS</div><div class="acro-long">AS Master Switch</div></div>
+    <div class="acro-item"><div class="acro-short">ASSI</div><div class="acro-long">Autonomous System Status Indicator</div></div>
+    <div class="acro-item"><div class="acro-short">AMI</div><div class="acro-long">Autonomous Mission Indicator</div></div>
+    <div class="acro-item"><div class="acro-short">RES</div><div class="acro-long">Remote Emergency System</div></div>
+    <div class="acro-item"><div class="acro-short">EBS</div><div class="acro-long">Emergency Brake System</div></div>
+  </div>
+
+</div>
+
+
+<!-- ===== QUIZ ===== -->
+<div class="tab-panel" id="tab-quiz">
+
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(0,196,122,0.12);">🧠</div>
+    <div>
+      <h2>Quick Quiz — Test Your Knowledge</h2>
+      <p>Reveal each answer only after you've thought about it first</p>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <div class="tip-label">How to Use</div>
+    Read each question, answer mentally, then click "Reveal Answer" to check. Works best as a daily review.
+  </div>
+
+  <div class="quiz-card">
+    <div class="quiz-q">1. What is the minimum wheelbase required for all Formula Student vehicles?</div>
+    <button class="quiz-reveal-btn" onclick="reveal(this)">Reveal Answer</button>
+    <div class="quiz-answer"><strong>1525mm</strong> — Rule T2.7.1</div>
+  </div>
+
+  <div class="quiz-card">
+    <div class="quiz-q">2. A driver fails to exit the vehicle in time during egress testing. How many seconds is the limit?</div>
+    <button class="quiz-reveal-btn" onclick="reveal(this)">Reveal Answer</button>
+    <div class="quiz-answer"><strong>5 seconds</strong> — IN13.2.7. Timer starts when driver is seated, hands on wheel; stops when both feet on ground.</div>
+  </div>
+
+  <div class="quiz-card">
+    <div class="quiz-q">3. What is the maximum achievable score in FS Class, and what event is worth the most points?</div>
+    <button class="quiz-reveal-btn" onclick="reveal(this)">Reveal Answer</button>
+    <div class="quiz-answer">Total = <strong>1000 points</strong>. Largest event = <strong>Endurance at 250 points</strong> (25% of total). Engineering Design is the highest static event at 150 pts.</div>
+  </div>
+
+  <div class="quiz-card">
+    <div class="quiz-q">4. What is the penalty for arguing with a competition official?</div>
+    <button class="quiz-reveal-btn" onclick="reveal(this)">Reveal Answer</button>
+    <div class="quiz-answer"><strong>Immediate Disqualification</strong> from the competition — Rule A3.3.1. No second chances.</div>
+  </div>
+
+  <div class="quiz-card">
+    <div class="quiz-q">5. What happens to an EV team if one driver's alcohol level is above 0.0%? What if a second team member fails?</div>
+    <button class="quiz-reveal-btn" onclick="reveal(this)">Reveal Answer</button>
+    <div class="quiz-answer">First violation: <strong>that member is immediately DQ'd</strong> for the rest of the competition. Second violation by another team member: <strong>entire team is immediately disqualified</strong> — A6.6.2.</div>
+  </div>
+
+  <div class="quiz-card">
+    <div class="quiz-q">6. What is the BPP presentation time? What happens if you go over or under?</div>
+    <button class="quiz-reveal-btn" onclick="reveal(this)">Reveal Answer</button>
+    <div class="quiz-answer">Presentation must be <strong>9–11 minutes</strong>. Under 9 min or over 11 min = <strong>penalty</strong>. Judges will stop any presentation exceeding 11 minutes — S2.3.4.</div>
+  </div>
+
+  <div class="quiz-card">
+    <div class="quiz-q">7. Name the 4 powertrain types available in the Lap Time Simulation event.</div>
+    <button class="quiz-reveal-btn" onclick="reveal(this)">Reveal Answer</button>
+    <div class="quiz-answer"><strong>1) NA Gasoline, 2) Turbo-Charged Gasoline, 3) Single Motor EV, 4) Four Motor EV</strong> — S7.3.3</div>
+  </div>
+
+  <div class="quiz-card">
+    <div class="quiz-q">8. What are the main hoop minimum wall thickness and cross-sectional area requirements for steel tubes?</div>
+    <button class="quiz-reveal-btn" onclick="reveal(this)">Reveal Answer</button>
+    <div class="quiz-answer">Main/Front Hoops: min CSA = <strong>173mm²</strong>, min wall = <strong>2.0mm</strong>, min I = <strong>11320mm⁴</strong> — T3.2.1</div>
+  </div>
+
+  <div class="quiz-card">
+    <div class="quiz-q">9. During endurance, how long does a team have to complete a driver change, and to restart the car?</div>
+    <button class="quiz-reveal-btn" onclick="reveal(this)">Reveal Answer</button>
+    <div class="quiz-answer"><strong>3 minutes</strong> to change driver + <strong>1 minute</strong> to restart. Excess time is added to total endurance time — D7.5.4.</div>
+  </div>
+
+  <div class="quiz-card">
+    <div class="quiz-q">10. What is the Tmax formula for the Endurance event? And for Autocross?</div>
+    <button class="quiz-reveal-btn" onclick="reveal(this)">Reveal Answer</button>
+    <div class="quiz-answer">Endurance: Tmax = <strong>145%</strong> of fastest team's time. Autocross: Tmax = <strong>145%</strong> of fastest time. Skidpad: <strong>125%</strong>. Acceleration: <strong>150%</strong>.</div>
+  </div>
+
+  <div class="quiz-card">
+    <div class="quiz-q">11. What is the cone DOO penalty in Skidpad vs Endurance?</div>
+    <button class="quiz-reveal-btn" onclick="reveal(this)">Reveal Answer</button>
+    <div class="quiz-answer">Skidpad: <strong>+0.2s</strong> per cone. Endurance: <strong>+2s</strong> per cone. All other events (Accel, Autocross, Trackdrive) = <strong>+2s</strong> — D9.1.7.</div>
+  </div>
+
+  <div class="quiz-card">
+    <div class="quiz-q">12. A vehicle is covered by a screen in the paddock during the day. What rule is this, and what's the penalty?</div>
+    <button class="quiz-reveal-btn" onclick="reveal(this)">Reveal Answer</button>
+    <div class="quiz-answer">Rule A3.9 — Car covering is unsportsmanlike conduct. Penalty: up to <strong>–50 points</strong> at the Chief Judge's discretion. Exception: overnight cover, rain, tyre debris covers, and severely damaged cars/parts are permitted.</div>
+  </div>
+
+  <div class="quiz-card">
+    <div class="quiz-q">13. What is the minimum tread depth for wet tyres?</div>
+    <button class="quiz-reveal-btn" onclick="reveal(this)">Reveal Answer</button>
+    <div class="quiz-answer"><strong>2.4mm</strong> minimum tread depth — T2.5.1(ii)</div>
+  </div>
+
+  <div class="quiz-card">
+    <div class="quiz-q">14. What three CO₂ conversion factors are used for Efficiency scoring?</div>
+    <button class="quiz-reveal-btn" onclick="reveal(this)">Reveal Answer</button>
+    <div class="quiz-answer">E10 Gasoline = <strong>799g CO₂/litre</strong> · Electric = <strong>143g CO₂/kWh</strong> · E85 = <strong>571g CO₂/litre</strong> — D7.9.2</div>
+  </div>
+
+  <div class="quiz-card">
+    <div class="quiz-q">15. How many pages can an EDR (Engineering Design Report) have, and how many must be drawings?</div>
+    <button class="quiz-reveal-btn" onclick="reveal(this)">Reveal Answer</button>
+    <div class="quiz-answer">Total max = <strong>8 pages</strong>: max 5 pages of content (text/graphs/images) + exactly <strong>3 pages of drawings</strong> (front, top, side — one each) — S5.2.2 & S5.2.3</div>
+  </div>
+
+  <hr class="divider">
+  <div class="subhead">Scrutineering Checklist — Pre-Competition</div>
+  <div class="card">
+    <h3>Items to confirm before attending</h3>
+    <div style="margin-top:0.75rem">
+      <div class="check-item"><input type="checkbox" id="c1"><label for="c1">SES submitted and approved</label></div>
+      <div class="check-item"><input type="checkbox" id="c2"><label for="c2">ESO qualified and registered (EV teams)</label></div>
+      <div class="check-item"><input type="checkbox" id="c3"><label for="c3">Faculty Advisor confirmed and attending</label></div>
+      <div class="check-item"><input type="checkbox" id="c4"><label for="c4">Insurance certificate uploaded (£15m PLI)</label></div>
+      <div class="check-item"><input type="checkbox" id="c5"><label for="c5">All drivers have valid licences registered</label></div>
+      <div class="check-item"><input type="checkbox" id="c6"><label for="c6">All team members are IMechE members (UK students)</label></div>
+      <div class="check-item"><input type="checkbox" id="c7"><label for="c7">CRD, EDR, BPP documents submitted on time</label></div>
+      <div class="check-item"><input type="checkbox" id="c8"><label for="c8">Design Concept Specification submitted</label></div>
+      <div class="check-item"><input type="checkbox" id="c9"><label for="c9">All drivers can egress in ≤5 seconds</label></div>
+      <div class="check-item"><input type="checkbox" id="c10"><label for="c10">Vehicle has minimum 30mm ground clearance</label></div>
+      <div class="check-item"><input type="checkbox" id="c11"><label for="c11">Wheelbase ≥1525mm confirmed</label></div>
+      <div class="check-item"><input type="checkbox" id="c12"><label for="c12">Driver equipment complete (helmet, HANS, gloves, suit, boots)</label></div>
+      <div class="check-item"><input type="checkbox" id="c13"><label for="c13">Telemetry set to 2.4GHz only</label></div>
+      <div class="check-item"><input type="checkbox" id="c14"><label for="c14">CRD brought as hard copies in ring binder</label></div>
+      <div class="check-item"><input type="checkbox" id="c15"><label for="c15">Motorsport UK liability waiver signed by all members</label></div>
+    </div>
+  </div>
+
+</div>
+
+</main>
+
+<script>
+function switchTab(id) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  const btns = document.querySelectorAll('nav button');
+  btns.forEach(b => {
+    if (b.getAttribute('onclick') === `switchTab('${id}')`) b.classList.add('active');
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function reveal(btn) {
+  const answer = btn.nextElementSibling;
+  answer.classList.toggle('visible');
+  btn.textContent = answer.classList.contains('visible') ? 'Hide Answer' : 'Reveal Answer';
+}
+</script>
+</body>
+</html>
