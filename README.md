@@ -25,9 +25,10 @@ Generic scheme of organisation is as follows:
 
 ```text
 ├── .github/                 # Issue templates and workflows
-├── '~year~/                 # Docment release year Directory
-|    ├── FSUK-~year~-Study-Guide.html         # Revision guide like document
-|    ├── fsuk-~year~-rules-sup.html           # Official supplementry rules document
-|    └── fsuk-~year~-rules.html               # Official supplementry rules document
-└── extra_documents/          # Additional relevant documententation or anything interesting 
+├──  Rules/                  # Rules Directory
+|     ├── '~year~/                 # Docment release year Directory
+|     |    ├── FSUK-~year~-Study-Guide.html         # Revision guide like document
+|     |    ├── fsuk-~year~-rules-sup.html           # Official supplementry rules document
+|     |    └── fsuk-~year~-rules.html               # Official supplementry rules document
+└── extra_documents/         # Additional relevant documententation or anything interesting 
 ```
